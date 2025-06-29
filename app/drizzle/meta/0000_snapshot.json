@@ -1,0 +1,299 @@
+{
+  "id": "ca2c3aae-32a3-4d04-9f24-1c58e32b7415",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.lcr_samples": {
+      "name": "lcr_samples",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pwsid": {
+          "name": "pwsid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sample_id": {
+          "name": "sample_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sampling_end_date": {
+          "name": "sampling_end_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contaminant_code": {
+          "name": "contaminant_code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sample_measure": {
+          "name": "sample_measure",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "unit_of_measure": {
+          "name": "unit_of_measure",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "lcr_samples_pwsid_water_systems_pwsid_fk": {
+          "name": "lcr_samples_pwsid_water_systems_pwsid_fk",
+          "tableFrom": "lcr_samples",
+          "tableTo": "water_systems",
+          "columnsFrom": [
+            "pwsid"
+          ],
+          "columnsTo": [
+            "pwsid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "lcr_samples_sample_id_unique": {
+          "name": "lcr_samples_sample_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "sample_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.mcls": {
+      "name": "mcls",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "contaminant": {
+          "name": "contaminant",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mclg": {
+          "name": "mclg",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mcl": {
+          "name": "mcl",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "health_effects": {
+          "name": "health_effects",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source": {
+          "name": "source",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "mcls_contaminant_unique": {
+          "name": "mcls_contaminant_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "contaminant"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.violations": {
+      "name": "violations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pwsid": {
+          "name": "pwsid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "violation_id": {
+          "name": "violation_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "compliance_period_begin": {
+          "name": "compliance_period_begin",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "compliance_period_end": {
+          "name": "compliance_period_end",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "violation_code": {
+          "name": "violation_code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_health_based": {
+          "name": "is_health_based",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contaminant_code": {
+          "name": "contaminant_code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "violations_pwsid_water_systems_pwsid_fk": {
+          "name": "violations_pwsid_water_systems_pwsid_fk",
+          "tableFrom": "violations",
+          "tableTo": "water_systems",
+          "columnsFrom": [
+            "pwsid"
+          ],
+          "columnsTo": [
+            "pwsid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "violations_violation_id_unique": {
+          "name": "violations_violation_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "violation_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.water_systems": {
+      "name": "water_systems",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pwsid": {
+          "name": "pwsid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "county": {
+          "name": "county",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "population_served": {
+          "name": "population_served",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "service_connections": {
+          "name": "service_connections",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primary_source": {
+          "name": "primary_source",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "water_systems_pwsid_unique": {
+          "name": "water_systems_pwsid_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "pwsid"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
