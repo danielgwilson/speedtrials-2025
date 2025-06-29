@@ -1,0 +1,2 @@
+devCommand: cd app && pnpm install && pnpm run dev -- --port $PORT
+portRange: 3010-3020
